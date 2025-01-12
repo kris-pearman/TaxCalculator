@@ -7,7 +7,12 @@ namespace TaxCalculator.Server.Controllers
     [Route("[controller]")]
     public class TaxCalculatorController : ControllerBase
     {
-        [HttpGet(Name = "GetWeatherForecast")]
+        /// <summary>
+        /// Gets details of tax calculations for a given salary.
+        /// </summary>
+        /// <param name="salary">The annual gross salary.</param>
+        /// <returns>An object containing annual and monthly gross and net pay as well as tax paid</returns>
+        [HttpGet("{salary}")]
         public IActionResult CalculateTax(int salary)
         {
             return Ok(new TaxCalculatorResponse()
