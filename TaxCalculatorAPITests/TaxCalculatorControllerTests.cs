@@ -30,7 +30,7 @@ namespace TaxCalculatorAPITests
             result.Should().NotBeNull();
             result!.StatusCode.Should().Be(200);
             result.Value.Should().BeOfType<TaxCalculatorResponse>()
-                .Which.Should().NotBe(expected);
+                .Which.Should().BeEquivalentTo(expected);
 
 
         }
