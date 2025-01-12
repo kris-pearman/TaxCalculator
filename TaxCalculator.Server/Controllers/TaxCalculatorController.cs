@@ -3,6 +3,9 @@ using TaxCalculator.Server.Models;
 
 namespace TaxCalculator.Server.Controllers
 {
+    /// <summary>
+    /// An API for calculating tax paid for a given salary.
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class TaxCalculatorController : ControllerBase
