@@ -33,8 +33,6 @@ namespace TaxCalculatorAPITests
             result!.StatusCode.Should().Be(200);
             result.Value.Should().BeOfType<TaxCalculatorResponse>()
                 .Which.Should().BeEquivalentTo(expected);
-
-
         }
     }
 }
