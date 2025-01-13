@@ -2,32 +2,34 @@ using Microsoft.AspNetCore.Mvc;
 using TaxCalculator.Server.Controllers;
 using TaxCalculator.Server.Models;
 using FluentAssertions;
+using TaxCalculator.Server.Services;
+using Moq;
 
 namespace TaxCalculatorAPITests
 {
     public class TaxCalculatorControllerTests
     {
+        private Mock<ITaxCalculatorService> _mockTaxCalculatorService;
+
         [SetUp]
         public void Setup()
         {
-
+                _mockTaxCalculatorService = new Mock<ITaxCalculatorService>();
         }
 
         [Test]
-        public void CalculateTax_ReturnsCorrectObjectWithOKResponse()
+        public async Task CalculateTax_ReturnsCorrectObjectWithOKResponse()
         {
-            var _taxCalculatorController = new TaxCalculatorController();
+            var _taxCalculatorController = new TaxCalculatorController(_mockTaxCalculatorService.Object);
+            var salary = 10000;
             var expected = new TaxCalculatorResponse()
             {
-                AnnualGrossPay = 0,
-                AnnualNetPay = 0,
-                MonthlyGrossPay = 0,
-                MonthlyNetPay = 0,
-                AnnualTaxPaid = 0,
-                MonthlyTaxPaid = 0,
+                AnnualTaxPaid = 1000,
             };
 
-            var result = _taxCalculatorController.CalculateTax(0) as OkObjectResult;
+            _mockTaxCalculatorService.Setup(x => x.CalculateTotalTax(salary)).ReturnsAsync(expected);
+
+            var result = await _taxCalculatorController.CalculateTax(salary) as OkObjectResult;
             
             result.Should().NotBeNull();
             result!.StatusCode.Should().Be(200);
