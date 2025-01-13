@@ -20,7 +20,7 @@ namespace TaxCalculator.Server.Controllers
         {
             return Ok(new TaxCalculatorResponse()
             {
-                AnnualGrossPay = 0,
+                AnnualGrossPay = 100,
                 AnnualNetPay = 0,
                 MonthlyGrossPay = 0,
                 MonthlyNetPay = 0,

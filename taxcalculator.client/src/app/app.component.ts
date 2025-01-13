@@ -8,6 +8,15 @@ interface WeatherForecast {
   summary: string;
 }
 
+interface Taxcalculator {
+  annualGrossPay: number;
+  annualNetPay: number;
+  annuarlTaxPaid: number;
+  monthlyGrossPay: number;
+  monthlyNetPay: number;
+  monthlyTaxPaid: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +25,19 @@ interface WeatherForecast {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
-
+  public taxValues: Taxcalculator = {
+    annualGrossPay: 0,
+    annualNetPay: 0,
+    annuarlTaxPaid: 0,
+    monthlyGrossPay: 0,
+    monthlyNetPay: 0,
+    monthlyTaxPaid: 0,
+  };
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getForecasts();
+    this.getTax();
   }
 
   getForecasts() {
@@ -30,6 +47,18 @@ export class AppComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+      }
+    );
+  }
+
+  getTax() {
+    this.http.get<Taxcalculator>('/taxcalculator/1').subscribe(
+      (result) => {
+        console.log('API Response:', result);
+        this.taxValues = result;
+      },
+      (error) => {
+        console.error('Error:', error);
       }
     );
   }

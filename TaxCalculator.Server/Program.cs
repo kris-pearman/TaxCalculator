@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -22,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 

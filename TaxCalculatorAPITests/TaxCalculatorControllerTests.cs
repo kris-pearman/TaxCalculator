@@ -22,7 +22,9 @@ namespace TaxCalculatorAPITests
                 AnnualGrossPay = 0,
                 AnnualNetPay = 0,
                 MonthlyGrossPay = 0,
-                MonthlyNetPay = 0
+                MonthlyNetPay = 0,
+                AnnualTaxPaid = 0,
+                MonthlyTaxPaid = 0,
             };
 
             var result = _taxCalculatorController.CalculateTax(0) as OkObjectResult;
