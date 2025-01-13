@@ -36,5 +36,19 @@ namespace TaxCalculatorAPITests
             result.Value.Should().BeOfType<TaxCalculatorResponse>()
                 .Which.Should().BeEquivalentTo(expected);
         }
+
+        [Test]
+        public async Task CalculateTax_Returns500_WhenServiceThrows()
+        {
+            var _taxCalculatorController = new TaxCalculatorController(_mockTaxCalculatorService.Object);
+            var salary = 10000;
+
+            _mockTaxCalculatorService.Setup(x => x.CalculateTotalTax(salary)).ThrowsAsync(new Exception("Something went wrong"));
+
+            var result = await _taxCalculatorController.CalculateTax(salary) as ObjectResult;
+
+            result.Should().NotBeNull();
+            result!.StatusCode.Should().Be(500);
+        }
     }
 }

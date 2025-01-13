@@ -31,7 +31,8 @@ namespace TaxCalculator.Server.Controllers
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                //TODO: This needs a logger to log the error
+                return StatusCode(500, new { message = "An error has occurred calculating tax", details = ex.Message });
             }
             
         }
