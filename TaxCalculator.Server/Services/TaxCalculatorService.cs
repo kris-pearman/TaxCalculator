@@ -3,6 +3,7 @@ using TaxCalculator.Server.Repositories;
 
 namespace TaxCalculator.Server.Services
 {
+    // PaySummaryService
     public class TaxCalculatorService : ITaxCalculatorService
     {
         private ITaxBandsRepository _taxBandsRepository;
@@ -10,6 +11,7 @@ namespace TaxCalculator.Server.Services
         {
             _taxBandsRepository = taxBandsRepository;
         }
+        //Calculate PaySummary -> PaySummaryResponse
         public async Task<TaxCalculatorResponse> CalculateTotalTax(int salary)
         {
             return await CalculatePaySlip(salary);

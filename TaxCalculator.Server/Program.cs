@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ITaxCalculatorService, TaxCalculatorService>();
 builder.Services.AddSingleton<ITaxBandsRepository, InMemoryTaxBandsRepository>();
+builder.Services.AddLogging();
 
 
 
