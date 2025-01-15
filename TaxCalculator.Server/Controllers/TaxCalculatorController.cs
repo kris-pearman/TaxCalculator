@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaxCalculator.Server.Models;
+using System.Net;
 using TaxCalculator.Server.Services;
 
 namespace TaxCalculator.Server.Controllers
 {
-    /// <summary>
-    /// An API for calculating tax paid for a given salary.
-    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class TaxCalculatorController : ControllerBase
@@ -16,11 +13,6 @@ namespace TaxCalculator.Server.Controllers
         {
             _taxCalculatorService = taxCalculatorService;
         }
-        /// <summary>
-        /// Gets details of tax calculations for a given salary.
-        /// </summary>
-        /// <param name="salary">The annual gross salary.</param>
-        /// <returns>An object containing annual and monthly gross and net pay as well as tax paid</returns>
         [HttpGet("{salary}")]
         public async Task<IActionResult> CalculateTax(int salary)
         {
@@ -32,7 +24,7 @@ namespace TaxCalculator.Server.Controllers
             catch (Exception ex)
             {
                 //TODO: This needs a logger to log the error
-                return StatusCode(500, new { message = "An error has occurred calculating tax", details = ex.Message });
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
             
         }

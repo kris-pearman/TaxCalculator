@@ -45,7 +45,7 @@ namespace TaxCalculatorAPITests
 
             _mockTaxCalculatorService.Setup(x => x.CalculateTotalTax(salary)).ThrowsAsync(new Exception("Something went wrong"));
 
-            var result = await _taxCalculatorController.CalculateTax(salary) as ObjectResult;
+            var result = await _taxCalculatorController.CalculateTax(salary) as StatusCodeResult;
 
             result.Should().NotBeNull();
             result!.StatusCode.Should().Be(500);
