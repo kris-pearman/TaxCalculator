@@ -1,1 +1,11 @@
-<p>tax-display works!</p>
+<h1>TAX DISPLAY OUTPUT</h1>
+@if(taxValues){
+<div class="d-flex flex-column">
+    <span>annual gross: {{ taxValues.annualGrossSalary | currency : "GBP" }}</span>
+    <span>annual net: {{ taxValues.annualNetSalary | currency : "GBP" }}</span>
+    <span>annual tax: {{ taxValues.annualTaxPaid | currency : "GBP" }}</span>
+    <span>monthly gross: {{ taxValues.monthlyGrossSalary | currency : "GBP" }}</span>
+    <span>monthly net: {{ taxValues.monthlyNetSalary | currency : "GBP" }}</span>
+    <span>monthly tax: {{ taxValues.monthlyTaxPaid | currency : "GBP" }}</span>
+</div>
+}
