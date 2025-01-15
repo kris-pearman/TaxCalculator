@@ -1,29 +1,27 @@
-﻿<h1 id="tableLabel">Weather forecast</h1>
+﻿<app-calculation-page></app-calculation-page>
 
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<table *ngIf="forecasts">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.date }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
-        </tr>
-    </tbody>
-    Hello World
-</table>
-
-<div *ngIf="taxValues">
-    {{ taxValues.annualGrossPay }}
+<p class="h2 mt-4">Check API is working:</p>
+<div *ngIf="taxValues" class="d-flex flex-column">
+    <span>annual gross: {{ taxValues.annualGrossSalary | currency : "GBP" }}</span>
+    <span>annual net: {{ taxValues.annualNetSalary | currency : "GBP" }}</span>
+    <span>annual tax: {{ taxValues.annualTaxPaid | currency : "GBP" }}</span>
+    <span>monthly gross: {{ taxValues.monthlyGrossSalary | currency : "GBP" }}</span>
+    <span>monthly net: {{ taxValues.monthlyNetSalary | currency : "GBP" }}</span>
+    <span>monthly tax: {{ taxValues.monthlyTaxPaid | currency : "GBP" }}</span>
 </div>
+
+
+<aside class="mt-5">
+    <h3>TODO List</h3>
+    <ul>
+        <li>Pass salary to new component</li>
+        <li>Make new component send request off via service to calculate tax</li>
+        <li>Grab the value and assign it to an object</li>
+        <li>Display data in new component</li>
+        <li>Unit test button click</li>
+        <li>Unit test getting an error</li>
+        <li>Unit test getting a success</li>
+        <li>Refactor names/check if interface is suitable over class</li>
+        <li>Remove todo list and API check code and any leftover placeholder code/comments</li>
+    </ul>
+</aside>

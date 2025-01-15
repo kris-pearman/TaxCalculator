@@ -1,20 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { TaxCalculator } from './models/taxCalculator.model';
 
 interface WeatherForecast {
   date: string;
   temperatureC: number;
   temperatureF: number;
   summary: string;
-}
-
-interface Taxcalculator {
-  annualGrossPay: number;
-  annualNetPay: number;
-  annuarlTaxPaid: number;
-  monthlyGrossPay: number;
-  monthlyNetPay: number;
-  monthlyTaxPaid: number;
 }
 
 @Component({
@@ -25,34 +17,22 @@ interface Taxcalculator {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
-  public taxValues: Taxcalculator = {
-    annualGrossPay: 0,
-    annualNetPay: 0,
-    annuarlTaxPaid: 0,
-    monthlyGrossPay: 0,
-    monthlyNetPay: 0,
+  public taxValues: TaxCalculator = {
+    annualGrossSalary: 0,
+    annualNetSalary: 0,
+    annualTaxPaid: 0,
+    monthlyGrossSalary: 0,
+    monthlyNetSalary: 0,
     monthlyTaxPaid: 0,
   };
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getForecasts();
     this.getTax();
   }
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
   getTax() {
-    this.http.get<Taxcalculator>('/taxcalculator/1').subscribe(
+    this.http.get<TaxCalculator>('/taxcalculator/100000').subscribe(
       (result) => {
         console.log('API Response:', result);
         this.taxValues = result;
