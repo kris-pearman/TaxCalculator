@@ -1,7 +1,9 @@
-﻿namespace TaxCalculator.Server.Services
+﻿using TaxCalculator.Server.Models;
+
+namespace TaxCalculator.Server.Services
 {
     public interface ITaxCalculatorService
     {
-        Task<int> CalculateTotalTax(int salary);
+        Task<TaxCalculatorResponse> CalculateTotalTax(int salary);
     }
 }

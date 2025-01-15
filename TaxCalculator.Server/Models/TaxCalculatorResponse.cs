@@ -2,11 +2,11 @@
 {
     public class TaxCalculatorResponse
     {
-        public decimal AnnualGrossPay {  get; set; }
-        public decimal AnnualNetPay { get; set; }
+        public decimal AnnualGrossSalary {  get; set; }
+        public decimal AnnualNetSalary { get; set; }
         public decimal AnnualTaxPaid { get; set; }
-        public decimal MonthlyGrossPay { get; set; }
-        public decimal MonthlyNetPay { get; set; }
+        public decimal MonthlyGrossSalary { get; set; }
+        public decimal MonthlyNetSalary { get; set; }
         public decimal MonthlyTaxPaid { get; set; }
     }
 }
