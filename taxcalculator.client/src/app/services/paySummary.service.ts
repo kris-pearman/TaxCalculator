@@ -9,7 +9,6 @@ export class PaySummaryService {
   constructor(private http: HttpClient) {}
 
   create(salary: number) {
-    return this.http.get<PaySummary>(`/taxcalculator/${salary}`);
+    return this.http.get<PaySummary>(`/api/v1/PaySummary/${salary}`);
   }
 }
-//TODO: CHANGE ENDPOINT WHEN WE REFACTOR BACKEND

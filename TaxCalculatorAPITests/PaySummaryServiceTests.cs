@@ -86,9 +86,9 @@ namespace TaxCalculatorAPITests
                 AnnualTaxPaid = 12,
                 AnnualGrossSalary = 100,
                 AnnualNetSalary = salary - taxBand.Rate,
-                MonthlyGrossSalary = salary/12,
-                MonthlyNetSalary = (salary/12) - 1,
-                MonthlyTaxPaid = taxBand.Rate/12
+                MonthlyGrossSalary = salary / 12,
+                MonthlyNetSalary = (salary / 12) - 1,
+                MonthlyTaxPaid = taxBand.Rate / 12
             };
             _mockTaxBandsRepository.Setup(e => e.GetAll()).ReturnsAsync(new List<TaxBand>() { taxBand });
 
@@ -98,10 +98,5 @@ namespace TaxCalculatorAPITests
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(expected);
         }
-
-
-        //TODO: Make these one test with 3 cases, and then do 6 cases that are boundaries
-        //TODO: It feels like we need to test the rest of the logic which is the full return object and should they be new tests?
-        //TODO: CHECK TEST NAMES DONT SAY TAX IN HERE AND IN CONTROLLER TESTS
     }
 }
