@@ -13,22 +13,22 @@ namespace TaxCalculator.Server.Repositories
                 new TaxBand()
                 {
                     Id = 0,
-                    LowerBand = 0,
-                    UpperBand = 5000,
+                    LowerBoundary = 0,
+                    UpperBoundary = 5000,
                     Rate = 0
                 },
                 new TaxBand()
                 {
                     Id = 1,
-                    LowerBand = 5000,
-                    UpperBand = 20000,
+                    LowerBoundary = 5000,
+                    UpperBoundary = 20000,
                     Rate = 20
                 },
                 new TaxBand()
                 {
                     Id = 2,
-                    LowerBand = 20000,
-                    UpperBand = null,
+                    LowerBoundary = 20000,
+                    UpperBoundary = null,
                     Rate = 40
                 }
             };

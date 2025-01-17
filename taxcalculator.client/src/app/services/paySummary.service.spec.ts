@@ -11,6 +11,7 @@ import { PaySummary as PaySummary } from '../models/paySummary.model';
 describe('PaySummaryService', () => {
   let service: PaySummaryService;
   let httpMock: HttpTestingController;
+  let apiEndpoint: string;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,6 +19,7 @@ describe('PaySummaryService', () => {
     });
     service = TestBed.inject(PaySummaryService);
     httpMock = TestBed.inject(HttpTestingController);
+    apiEndpoint = '/api/v1/PaySummary';
   });
 
   it('should be created', () => {
@@ -38,7 +40,7 @@ describe('PaySummaryService', () => {
       expect(data).toEqual(mockPaySummary);
     });
 
-    const req = httpMock.expectOne('/taxcalculator/60000');
+    const req = httpMock.expectOne(`${apiEndpoint}/60000`);
     expect(req.request.method).toBe('GET');
     req.flush(mockPaySummary);
   });
@@ -54,7 +56,7 @@ describe('PaySummaryService', () => {
       },
     });
 
-    const req = httpMock.expectOne('/taxcalculator/-100');
+    const req = httpMock.expectOne(`${apiEndpoint}/-100`);
     req.flush(errorMessage, { status: 400, statusText: errorMessage });
   });
 
@@ -69,7 +71,7 @@ describe('PaySummaryService', () => {
       },
     });
 
-    const req = httpMock.expectOne('/taxcalculator/-100');
+    const req = httpMock.expectOne(`${apiEndpoint}/-100`);
     req.flush(errorMessage, { status: 500, statusText: errorMessage });
   });
 });
