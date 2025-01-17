@@ -42,11 +42,17 @@ namespace TaxCalculatorAPITests
         }
 
         [Test]
+        //Values in boundaries that should return a whole number
         [TestCase(500, 0)]
-        [TestCase(5123, 24.6)]
         [TestCase(10000, 1000)]
-        [TestCase(10123, 1024.6)]
         [TestCase(111500, 39600)]
+        //Values in boundaries that should return a decimal
+        [TestCase(5123, 24.6)]
+        [TestCase(10123, 1024.6)]
+        //Edge cases for each boundary
+        [TestCase(0, 0)]
+        [TestCase(5000, 0)]
+        [TestCase(20000, 3000)]
         public async Task CalculateTotalTax_CalculatesTotalTaxPaid_ForEachBoundary(int salary, decimal expectedTax)
         {
             var taxCalculatorService = new PaySummaryService(_mockTaxBandsRepository.Object);
@@ -65,23 +71,32 @@ namespace TaxCalculatorAPITests
         }
 
         [Test]
-        [TestCase(0, 0)]
-        [TestCase(5000, 0)]
-        [TestCase(20000, 3000)]
-        public async Task CalculateTotalTax_CalculatesTotalTaxPaid_EdgeCases(int salary, decimal expectedTax)
+        public async Task CreatePaySummary_CreatesPaySummary()
         {
+            var taxBand = new TaxBand()
+            {
+                Id = 1,
+                LowerBoundary = 0,
+                Rate = 12,
+            };
             var paySummaryService = new PaySummaryService(_mockTaxBandsRepository.Object);
+            var salary = 100;
             var expected = new PaySummaryResponse()
             {
-                AnnualTaxPaid = expectedTax,
+                AnnualTaxPaid = 12,
+                AnnualGrossSalary = 100,
+                AnnualNetSalary = salary - taxBand.Rate,
+                MonthlyGrossSalary = salary/12,
+                MonthlyNetSalary = (salary/12) - 1,
+                MonthlyTaxPaid = taxBand.Rate/12
             };
+            _mockTaxBandsRepository.Setup(e => e.GetAll()).ReturnsAsync(new List<TaxBand>() { taxBand });
 
-            _mockTaxBandsRepository.Setup(x => x.GetAll()).ReturnsAsync(_taxBands);
 
             var result = await paySummaryService.Create(salary);
 
             result.Should().NotBeNull();
-            result.AnnualTaxPaid.Should().Be(expected.AnnualTaxPaid);
+            result.Should().BeEquivalentTo(expected);
         }
 
 

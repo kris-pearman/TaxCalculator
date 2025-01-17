@@ -28,7 +28,7 @@ namespace TaxCalculator.Server.Services
                 AnnualNetSalary = salary - annualTaxPaid,
                 MonthlyTaxPaid = monthlyTaxPaid,
                 MonthlyGrossSalary = monthlyGrossSalary,
-                MonthlyNetSalary = salary - monthlyTaxPaid
+                MonthlyNetSalary = monthlyGrossSalary - monthlyTaxPaid
             };
         }
 
