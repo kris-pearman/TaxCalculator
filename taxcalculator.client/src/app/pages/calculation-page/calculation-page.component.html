@@ -1,0 +1,12 @@
+<div class="input-group ms-2 mt-2 inputForm">
+    <span class="input-group-text">Gross Annual Salary</span>
+    <input type="number" min="0" class="form-control" placeholder="Salary" [(ngModel)]="salary" />
+    <button class="ms-3 rounded" (click)="onClickCalculate()">Calculate</button>
+</div>
+
+
+<div class="text-start ms-2 mt-2">
+    @if(isLoading){<div class="loading">LOADING</div>}
+    @if(errorMessage){<div class="text-danger">{{ errorMessage }}</div>}
+    @if(showSummary){<app-pay-summary [taxValues]="taxValues"></app-pay-summary>}
+</div>

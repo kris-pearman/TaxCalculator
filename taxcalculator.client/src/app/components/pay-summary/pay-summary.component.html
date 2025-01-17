@@ -1,0 +1,11 @@
+@if(taxValues){
+<hr>
+<div class="d-flex flex-column">
+    <span>Gross Annual Salary: {{ taxValues.annualGrossSalary | currency : "GBP" }}</span>
+    <span>Gross Monthly Salary: {{ taxValues.monthlyGrossSalary | currency : "GBP" }}</span>
+    <span>Net Annual Salary: {{ taxValues.annualNetSalary | currency : "GBP" }}</span>
+    <span>Net Monthly Salary: {{ taxValues.monthlyNetSalary | currency : "GBP" }}</span>
+    <span>Annual Tax Paid: {{ taxValues.annualTaxPaid | currency : "GBP" }}</span>
+    <span>Monthly Tax Paid: {{ taxValues.monthlyTaxPaid | currency : "GBP" }}</span>
+</div>
+}
