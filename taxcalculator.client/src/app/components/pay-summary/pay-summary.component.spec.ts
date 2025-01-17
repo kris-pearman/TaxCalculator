@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaxDisplayComponent } from './tax-display.component';
+import { PaySummaryComponent } from './pay-summary.component';
 
 describe('TaxDisplayComponent', () => {
-  let component: TaxDisplayComponent;
-  let fixture: ComponentFixture<TaxDisplayComponent>;
+  let component: PaySummaryComponent;
+  let fixture: ComponentFixture<PaySummaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TaxDisplayComponent],
+      declarations: [PaySummaryComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TaxDisplayComponent);
+    fixture = TestBed.createComponent(PaySummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

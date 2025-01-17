@@ -8,5 +8,5 @@
 <div class="text-start ms-2 mt-2">
     @if(isLoading){<div class="loading">LOADING</div>}
     @if(errorMessage){<div class="text-danger">{{ errorMessage }}</div>}
-    @if(showSummary){<app-tax-display [taxValues]="taxValues"></app-tax-display>}
+    @if(showSummary){<app-pay-summary [taxValues]="taxValues"></app-pay-summary>}
 </div>

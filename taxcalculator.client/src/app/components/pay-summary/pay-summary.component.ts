@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { PaySummary } from '../../models/paySummary.model';
 
 @Component({
-  selector: 'app-tax-display',
+  selector: 'app-pay-summary',
   standalone: false,
 
-  templateUrl: './tax-display.component.html',
-  styleUrl: './tax-display.component.css',
+  templateUrl: './pay-summary.component.html',
+  styleUrl: './pay-summary.component.css',
 })
-export class TaxDisplayComponent {
+export class PaySummaryComponent {
   @Input() taxValues!: PaySummary | undefined;
 }
