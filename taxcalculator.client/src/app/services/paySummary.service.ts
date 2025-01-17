@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { TaxCalculator } from '../models/taxCalculator.model';
+import { PaySummary } from '../models/paySummary.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TaxService {
+export class PaySummaryService {
   constructor(private http: HttpClient) {}
 
-  calculateTax(salary: number) {
-    return this.http.get<TaxCalculator>(`/taxcalculator/${salary}`);
+  create(salary: number) {
+    return this.http.get<PaySummary>(`/taxcalculator/${salary}`);
   }
 }
 //TODO: CHANGE ENDPOINT WHEN WE REFACTOR BACKEND

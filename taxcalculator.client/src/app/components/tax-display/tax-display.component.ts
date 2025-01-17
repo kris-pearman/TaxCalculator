@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TaxCalculator } from '../../models/taxCalculator.model';
+import { PaySummary } from '../../models/paySummary.model';
 
 @Component({
   selector: 'app-tax-display',
@@ -9,5 +9,5 @@ import { TaxCalculator } from '../../models/taxCalculator.model';
   styleUrl: './tax-display.component.css',
 })
 export class TaxDisplayComponent {
-  @Input() taxValues!: TaxCalculator | undefined;
+  @Input() taxValues!: PaySummary | undefined;
 }

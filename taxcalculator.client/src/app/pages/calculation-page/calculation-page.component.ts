@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { TaxService } from '../../services/tax.service';
-import { TaxCalculator } from '../../models/taxCalculator.model';
+import { PaySummaryService } from '../../services/paySummary.service';
+import { PaySummary } from '../../models/paySummary.model';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -16,8 +16,8 @@ export class CalculationPageComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
   showSummary: boolean = false;
-  taxService = inject(TaxService);
-  taxValues: TaxCalculator | undefined;
+  taxService = inject(PaySummaryService);
+  taxValues: PaySummary | undefined;
 
   onClickCalculate() {
     this.errorMessage = '';
@@ -32,10 +32,10 @@ export class CalculationPageComponent {
 
   private retrieveTax() {
     this.taxService
-      .calculateTax(this.salary)
+      .create(this.salary)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (result: TaxCalculator) => {
+        next: (result: PaySummary) => {
           this.taxValues = result;
         },
         error: (err: HttpErrorResponse) => {
