@@ -18,8 +18,8 @@ namespace TaxCalculator.Server.Services
         private async Task<PaySummaryResponse> CalculatePaySummary(int salary)
         {
             var annualTaxPaid = await CalculateTax(salary);
-            var monthlyTaxPaid = annualTaxPaid / 12;
-            var monthlyGrossSalary = salary / 12;
+            var monthlyTaxPaid = annualTaxPaid / 12m;
+            var monthlyGrossSalary = salary / 12m;
 
             return new PaySummaryResponse
             {

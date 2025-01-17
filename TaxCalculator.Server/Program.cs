@@ -10,10 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPaySummaryService, PaySummaryService>();
-builder.Services.AddSingleton<ITaxBandsRepository, InMemoryTaxBandsRepository>();
+
+//Uncomment the below if wanting to run without Entity Framework Database
+//builder.Services.AddSingleton<ITaxBandsRepository, InMemoryTaxBandsRepository>();
+builder.Services.AddSingleton<ITaxBandsRepository, TaxBandsDBRepository>();
+
 builder.Services.AddLogging();
-
-
 
 var app = builder.Build();
 
