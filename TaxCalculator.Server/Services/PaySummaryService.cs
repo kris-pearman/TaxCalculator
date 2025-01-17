@@ -3,27 +3,25 @@ using TaxCalculator.Server.Repositories;
 
 namespace TaxCalculator.Server.Services
 {
-    // PaySummaryService
-    public class TaxCalculatorService : ITaxCalculatorService
+    public class PaySummaryService : IPaySummaryService
     {
         private ITaxBandsRepository _taxBandsRepository;
-        public TaxCalculatorService(ITaxBandsRepository taxBandsRepository)
+        public PaySummaryService(ITaxBandsRepository taxBandsRepository)
         {
             _taxBandsRepository = taxBandsRepository;
         }
-        //Calculate PaySummary -> PaySummaryResponse
-        public async Task<TaxCalculatorResponse> CalculateTotalTax(int salary)
+        public async Task<PaySummaryResponse> Create(int salary)
         {
-            return await CalculatePaySlip(salary);
+            return await CalculatePaySummary(salary);
         }
 
-        private async Task<TaxCalculatorResponse> CalculatePaySlip(int salary)
+        private async Task<PaySummaryResponse> CalculatePaySummary(int salary)
         {
             var annualTaxPaid = await CalculateTax(salary);
             var monthlyTaxPaid = annualTaxPaid / 12;
             var monthlyGrossSalary = salary / 12;
 
-            return new TaxCalculatorResponse
+            return new PaySummaryResponse
             {
                 AnnualTaxPaid = annualTaxPaid,
                 AnnualGrossSalary = salary,
@@ -41,16 +39,23 @@ namespace TaxCalculator.Server.Services
 
             foreach (var band in taxBands)
             {
-                if (salary > band.LowerBand)
-                {
-                    var upperBand = band.UpperBand ?? int.MaxValue;
-                    var taxableAmount = Math.Min(upperBand, salary) - band.LowerBand;
-                    var taxFromBand = taxableAmount * (band.Rate / 100m);
-                    runningTotal += taxFromBand;
-                }
+                runningTotal += CalculateTaxForBand(salary, band);
             }
 
             return runningTotal;
+        }
+
+        private decimal CalculateTaxForBand(int salary, TaxBand band)
+        {
+            if (salary <= band.LowerBoundary)
+            {
+                return 0;
+            }
+
+            var upperBand = band.UpperBoundary ?? int.MaxValue;
+            var taxableAmount = Math.Min(upperBand, salary) - band.LowerBoundary;
+            var taxFromBand = taxableAmount * (band.Rate / 100m);
+            return taxFromBand;
         }
     }
 }

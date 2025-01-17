@@ -1,6 +1,6 @@
 ﻿namespace TaxCalculator.Server.Models
 {
-    public class TaxCalculatorResponse
+    public class PaySummaryResponse
     {
         public decimal AnnualGrossSalary {  get; set; }
         public decimal AnnualNetSalary { get; set; }
