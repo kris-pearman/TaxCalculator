@@ -9,9 +9,6 @@ export class TaxService {
   constructor(private http: HttpClient) {}
 
   calculateTax(salary: number) {
-    if (!Number.isInteger(salary)) {
-      throw new Error(`${salary} needs to be a whole number.`);
-    }
     return this.http.get<TaxCalculator>(`/taxcalculator/${salary}`);
   }
 }

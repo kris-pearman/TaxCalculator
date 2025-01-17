@@ -1,7 +1,12 @@
-<p class="h1 ms-2 mt-2">Heading for tax page</p>
-<input type="number" min="0" class="ms-2 mt-2" placeholder="Salary" [(ngModel)]="salary" />
-<button class="ms-3 rounded" (click)="onClickCalculate()">Calculate</button>
+<div class="input-group ms-2 mt-2 inputForm">
+    <span class="input-group-text">Gross Annual Salary</span>
+    <input type="number" min="0" class="form-control" placeholder="Salary" [(ngModel)]="salary" />
+    <button class="ms-3 rounded" (click)="onClickCalculate()">Calculate</button>
+</div>
 
-@if(isLoading){<div>LOADING</div>}
-@if(errorMessage){<div>{{ errorMessage }}</div>}
-@if(showSummary){<app-tax-display [taxValues]="taxValues"></app-tax-display>}
+
+<div class="text-start ms-2 mt-2">
+    @if(isLoading){<div class="loading">LOADING</div>}
+    @if(errorMessage){<div class="text-danger">{{ errorMessage }}</div>}
+    @if(showSummary){<app-tax-display [taxValues]="taxValues"></app-tax-display>}
+</div>

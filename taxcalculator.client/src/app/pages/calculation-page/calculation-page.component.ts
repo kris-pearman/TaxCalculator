@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TaxService } from '../../services/tax.service';
 import { TaxCalculator } from '../../models/taxCalculator.model';
 import { finalize } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-calculation-page',
@@ -19,13 +20,14 @@ export class CalculationPageComponent {
   taxValues: TaxCalculator | undefined;
 
   onClickCalculate() {
+    this.errorMessage = '';
     this.isLoading = true;
-    try {
-      this.retrieveTax();
-    } catch (err) {
+    if (!Number.isInteger(this.salary)) {
+      this.errorMessage = `Salary needs to be a whole number.`;
       this.isLoading = false;
-      this.errorMessage = `${err}`;
+      return;
     }
+    this.retrieveTax();
   }
 
   private retrieveTax() {
@@ -36,8 +38,15 @@ export class CalculationPageComponent {
         next: (result: TaxCalculator) => {
           this.taxValues = result;
         },
-        error: (err: Error) => {
-          this.errorMessage = `Error fetching tax details: ${err.message}`;
+        error: (err: HttpErrorResponse) => {
+          if (err.status == 400) {
+            this.errorMessage = 'Salary needs to be a positive number';
+          } else if (err.status == 500) {
+            this.errorMessage =
+              'Internal server error. Please try again later.';
+          } else {
+            this.errorMessage = `Error fetching tax details: ${err.message}`;
+          }
         },
       });
     this.showSummary = true;

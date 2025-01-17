@@ -1,11 +1,11 @@
-<h1>TAX DISPLAY OUTPUT</h1>
 @if(taxValues){
+<hr>
 <div class="d-flex flex-column">
-    <span>annual gross: {{ taxValues.annualGrossSalary | currency : "GBP" }}</span>
-    <span>annual net: {{ taxValues.annualNetSalary | currency : "GBP" }}</span>
-    <span>annual tax: {{ taxValues.annualTaxPaid | currency : "GBP" }}</span>
-    <span>monthly gross: {{ taxValues.monthlyGrossSalary | currency : "GBP" }}</span>
-    <span>monthly net: {{ taxValues.monthlyNetSalary | currency : "GBP" }}</span>
-    <span>monthly tax: {{ taxValues.monthlyTaxPaid | currency : "GBP" }}</span>
+    <span>Gross Annual Salary: {{ taxValues.annualGrossSalary | currency : "GBP" }}</span>
+    <span>Gross Monthly Salary: {{ taxValues.monthlyGrossSalary | currency : "GBP" }}</span>
+    <span>Net Annual Salary: {{ taxValues.annualNetSalary | currency : "GBP" }}</span>
+    <span>Net Monthly Salary: {{ taxValues.monthlyNetSalary | currency : "GBP" }}</span>
+    <span>Annual Tax Paid: {{ taxValues.annualTaxPaid | currency : "GBP" }}</span>
+    <span>Monthly Tax Paid: {{ taxValues.monthlyTaxPaid | currency : "GBP" }}</span>
 </div>
 }

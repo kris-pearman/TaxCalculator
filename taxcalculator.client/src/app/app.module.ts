@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculationPageComponent } from './pages/calculation-page/calculation-page.component';
 import { TaxDisplayComponent } from './components/tax-display/tax-display.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculationPageComponent,
-    TaxDisplayComponent
+    TaxDisplayComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
